@@ -12,12 +12,19 @@ import CoreLocation
 
 class MapVC: UIViewController,UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var pullUpViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapView: MKMapView!
-    let authorizationStatus = CLLocationManager.authorizationStatus()
-    let regionRadius :Double = 1000 //1km
+    @IBOutlet weak var pullUpView: UIView!
     
     //Variable
+    let authorizationStatus = CLLocationManager.authorizationStatus()
+    let regionRadius :Double = 1000 //1km
     var locationManager = CLLocationManager()
+    var spinner:UIActivityIndicatorView?
+    var progressLbl:UILabel?
+    var screenSize = UIScreen.main.bounds
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +43,33 @@ class MapVC: UIViewController,UIGestureRecognizerDelegate {
         mapView.addGestureRecognizer(doubleTap)
     }
     
+    func addSwipe(){
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(MapVC.animateViewDown))
+        swipe.direction = .down
+        pullUpView.addGestureRecognizer(swipe)
+    }
     
+    func animateViewUp(){
+        pullUpViewHeightConstraint.constant = 300
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func addSpinner(){
+        spinner = UIActivityIndicatorView()
+        spinner?.center = CGPoint(x: (screenSize.width / 2) - ((spinner?.frame.width)!/2), y: 150)
+        spinner?.color = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        spinner?.startAnimating()
+        pullUpView.addSubview(spinner!)
+    }
+    
+    @objc func animateViewDown(){
+        pullUpViewHeightConstraint.constant = 0
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+    }
 
     @IBAction func centerMapbtnPressed(_ sender: Any) {
         print("press")
@@ -69,6 +102,9 @@ extension MapVC:MKMapViewDelegate{
     }
     @objc func dropPin(sender:UITapGestureRecognizer){
         removePin()
+        animateViewUp()
+        addSwipe()
+        addSpinner()
         let touchPoint = sender.location(in: mapView)
         let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
