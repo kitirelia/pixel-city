@@ -7,21 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		315D1449773F04C9FFEFA0CF /* Pods_pixel_city.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183B3FE604A4D076CC7C7ABA /* Pods_pixel_city.framework */; };
 		64065C431F46C02A001E2B1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64065C421F46C02A001E2B1C /* AppDelegate.swift */; };
-		64065C451F46C02A001E2B1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64065C441F46C02A001E2B1C /* ViewController.swift */; };
+		64065C451F46C02A001E2B1C /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64065C441F46C02A001E2B1C /* MapVC.swift */; };
 		64065C481F46C02A001E2B1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64065C461F46C02A001E2B1C /* Main.storyboard */; };
 		64065C4A1F46C02A001E2B1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64065C491F46C02A001E2B1C /* Assets.xcassets */; };
 		64065C4D1F46C02A001E2B1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64065C4B1F46C02A001E2B1C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		028923347C55664D7ED296F8 /* Pods-pixel-city.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pixel-city.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pixel-city/Pods-pixel-city.debug.xcconfig"; sourceTree = "<group>"; };
+		183B3FE604A4D076CC7C7ABA /* Pods_pixel_city.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pixel_city.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64065C3F1F46C02A001E2B1C /* pixel-city.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pixel-city.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64065C421F46C02A001E2B1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		64065C441F46C02A001E2B1C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		64065C441F46C02A001E2B1C /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		64065C471F46C02A001E2B1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		64065C491F46C02A001E2B1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64065C4C1F46C02A001E2B1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64065C4E1F46C02A001E2B1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C92534880B903DD127253F3B /* Pods-pixel-city.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pixel-city.release.xcconfig"; path = "Pods/Target Support Files/Pods-pixel-city/Pods-pixel-city.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				315D1449773F04C9FFEFA0CF /* Pods_pixel_city.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				64065C411F46C02A001E2B1C /* pixel-city */,
 				64065C401F46C02A001E2B1C /* Products */,
+				6B3145DA3F7B58FCD06DC348 /* Pods */,
+				BA44994F70290AB125501E73 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +61,63 @@
 		64065C411F46C02A001E2B1C /* pixel-city */ = {
 			isa = PBXGroup;
 			children = (
+				64065C571F46C092001E2B1C /* Utilities */,
+				64065C561F46C083001E2B1C /* Extensions */,
+				64065C551F46C07B001E2B1C /* View */,
+				64065C541F46C06B001E2B1C /* Controller */,
 				64065C421F46C02A001E2B1C /* AppDelegate.swift */,
-				64065C441F46C02A001E2B1C /* ViewController.swift */,
 				64065C461F46C02A001E2B1C /* Main.storyboard */,
 				64065C491F46C02A001E2B1C /* Assets.xcassets */,
 				64065C4B1F46C02A001E2B1C /* LaunchScreen.storyboard */,
 				64065C4E1F46C02A001E2B1C /* Info.plist */,
 			);
 			path = "pixel-city";
+			sourceTree = "<group>";
+		};
+		64065C541F46C06B001E2B1C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				64065C441F46C02A001E2B1C /* MapVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		64065C551F46C07B001E2B1C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		64065C561F46C083001E2B1C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		64065C571F46C092001E2B1C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		6B3145DA3F7B58FCD06DC348 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				028923347C55664D7ED296F8 /* Pods-pixel-city.debug.xcconfig */,
+				C92534880B903DD127253F3B /* Pods-pixel-city.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BA44994F70290AB125501E73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				183B3FE604A4D076CC7C7ABA /* Pods_pixel_city.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 64065C511F46C02A001E2B1C /* Build configuration list for PBXNativeTarget "pixel-city" */;
 			buildPhases = (
+				89F3D4C0729FDB00A5C85E86 /* [CP] Check Pods Manifest.lock */,
 				64065C3B1F46C02A001E2B1C /* Sources */,
 				64065C3C1F46C02A001E2B1C /* Frameworks */,
 				64065C3D1F46C02A001E2B1C /* Resources */,
+				B0EA3C7154BD584D8A7EE170 /* [CP] Embed Pods Frameworks */,
+				3981C6AE83D46614ED7163AC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,12 +189,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3981C6AE83D46614ED7163AC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pixel-city/Pods-pixel-city-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89F3D4C0729FDB00A5C85E86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-pixel-city-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0EA3C7154BD584D8A7EE170 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-pixel-city/Pods-pixel-city-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pixel-city/Pods-pixel-city-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		64065C3B1F46C02A001E2B1C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64065C451F46C02A001E2B1C /* ViewController.swift in Sources */,
+				64065C451F46C02A001E2B1C /* MapVC.swift in Sources */,
 				64065C431F46C02A001E2B1C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +386,7 @@
 		};
 		64065C521F46C02A001E2B1C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 028923347C55664D7ED296F8 /* Pods-pixel-city.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 938M7XW9DC;
@@ -285,6 +401,7 @@
 		};
 		64065C531F46C02A001E2B1C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C92534880B903DD127253F3B /* Pods-pixel-city.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 938M7XW9DC;
