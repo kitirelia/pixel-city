@@ -49,6 +49,19 @@ class MapVC: UIViewController,UIGestureRecognizerDelegate {
 
 
 extension MapVC:MKMapViewDelegate{
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation{
+            return nil
+        }
+        
+        let pinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "droppablePin")
+        pinAnnotation.pinTintColor = #colorLiteral(red: 0.9771530032, green: 0.7062081099, blue: 0.1748393774, alpha: 1)
+        pinAnnotation.animatesDrop = true
+        return pinAnnotation
+    }
+    
     func centerMapOnUserLocation(){
         guard let coordinate = locationManager.location?.coordinate else {return}
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius)
@@ -79,7 +92,6 @@ extension MapVC:CLLocationManagerDelegate{
     func configureLocationServices(){
         print(authorizationStatus.rawValue)
         if authorizationStatus == .notDetermined {
-            print("print SETLOCATION")
             locationManager.requestAlwaysAuthorization()
         }else{
             return
