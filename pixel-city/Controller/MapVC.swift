@@ -143,12 +143,15 @@ extension MapVC:MKMapViewDelegate{
         addSwipe()
         addSpinner()
         addProgressLbl()
+        
         let touchPoint = sender.location(in: mapView)
         let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
         let annotation = DropablePin(coordinate: touchCoordinate, identifier: "droppablePin")
         mapView.addAnnotation(annotation)
-        print("drop Pin \(touchPoint)")
+        //print("drop Pin \(touchPoint)")
+        
+    print(flickrUrl(forApiKey: API_KEY, withAnnotation: annotation, numberOfPhotos: 40))
         
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius*2.0, regionRadius*2.0)
         mapView.setRegion(coordinateRegion, animated: true)
@@ -160,6 +163,11 @@ extension MapVC:MKMapViewDelegate{
             mapView.removeAnnotation(annotaion)
         }
     }
+    
+    func retrieveUrls(){
+        
+    }
+    
 }
 
 extension MapVC:CLLocationManagerDelegate{
