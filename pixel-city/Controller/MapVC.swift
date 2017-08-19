@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import Alamofire
+import AlamofireImage
 
 class MapVC: UIViewController,UIGestureRecognizerDelegate {
 
@@ -29,6 +30,7 @@ class MapVC: UIViewController,UIGestureRecognizerDelegate {
     var collectionView:UICollectionView?
     
     var imageUrlArray = [String]()
+    var imageArray = [UIImage]()
     
     
     override func viewDidLoad() {
@@ -39,13 +41,11 @@ class MapVC: UIViewController,UIGestureRecognizerDelegate {
         configureLocationServices()
         addDoubleTap()
         
-        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: flowLayout)
         collectionView?.register(PhotoCell.self, forCellWithReuseIdentifier: "photoCell")
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
-        
         
         pullUpView.addSubview(collectionView!)
     }
@@ -87,9 +87,9 @@ class MapVC: UIViewController,UIGestureRecognizerDelegate {
     func addProgressLbl(){
         progressLbl = UILabel()
         progressLbl?.frame = CGRect(x: (screenSize.width/2) - 120 , y: 175, width: 240, height: 40)
-        progressLbl?.font = UIFont(name: "Avenir Next", size: 18)
+        progressLbl?.font = UIFont(name: "Avenir Next", size: 14)
         progressLbl?.textColor = #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)
-        progressLbl?.text = "THIS IS LABEL"
+        progressLbl?.text = ""
         progressLbl?.textAlignment = .center
         collectionView?.addSubview(progressLbl!)
     }
@@ -101,6 +101,7 @@ class MapVC: UIViewController,UIGestureRecognizerDelegate {
     }
     
     @objc func animateViewDown(){
+        cancelAllSession()
         pullUpViewHeightConstraint.constant = 0
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
@@ -140,6 +141,7 @@ extension MapVC:MKMapViewDelegate{
         removePin()
         removeSpinner()
         removeProgressLbl()
+        cancelAllSession()
         
         animateViewUp()
         addSwipe()
@@ -151,16 +153,18 @@ extension MapVC:MKMapViewDelegate{
         
         let annotation = DropablePin(coordinate: touchCoordinate, identifier: "droppablePin")
         mapView.addAnnotation(annotation)
-        //print("drop Pin \(touchPoint)")
-        
-    //print(flickrUrl(forApiKey: API_KEY, withAnnotation: annotation, numberOfPhotos: 40))
-        
+
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinate, regionRadius*2.0, regionRadius*2.0)
         mapView.setRegion(coordinateRegion, animated: true)
-        retrieveUrls(forAnnotation: annotation) { (success) in
-            if success{
-                
-               print(self.imageUrlArray)
+        retrieveUrls(forAnnotation: annotation) { (finished) in
+            if finished{
+                self.retrieveImages(completion: { (success) in
+                    if success{
+                        self.removeSpinner()
+                        self.removeProgressLbl()
+                        // reload collection
+                    }
+                })
             }
         }
     }
@@ -184,6 +188,29 @@ extension MapVC:MKMapViewDelegate{
                 self.imageUrlArray.append(postUrl)
             }
             handler(true)
+        }
+    }
+    
+    func retrieveImages(completion:@escaping (_ status:Bool)->()){
+        imageArray = []
+        
+        for url in imageUrlArray{
+            Alamofire.request(url).responseImage(completionHandler: { (response) in
+                guard let image = response.result.value else {return}
+                self.imageArray.append(image)
+                self.progressLbl?.text = "\(self.imageArray.count)/40 IMAGES DOWNLOADED"
+                
+                if self.imageArray.count == self.imageUrlArray.count{
+                    completion(true)
+                }
+            })
+        }
+    }
+    
+    func cancelAllSession(){
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
+            sessionDataTask.forEach({ $0.cancel() })
+            downloadData.forEach({$0.cancel()})
         }
     }
     
