@@ -47,6 +47,8 @@ class MapVC: UIViewController,UIGestureRecognizerDelegate {
         collectionView?.delegate = self
         collectionView?.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
+        registerForPreviewing(with: self, sourceView: collectionView!)
+        
         pullUpView.addSubview(collectionView!)
     }
     
@@ -230,14 +232,22 @@ extension MapVC:CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("location did change")
+        //print("location did change")
         centerMapOnUserLocation()
     }
 }// end extension
 
 
 extension MapVC:UICollectionViewDelegate{
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "popVC") as? PopVC else {
+            //print("cannot find popVC")
+            return
+        }
+        
+        popVC.initData(forImage: imageArray[indexPath.item])
+        present(popVC, animated: true, completion: nil)
+    }
 }
 extension MapVC:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -258,8 +268,25 @@ extension MapVC:UICollectionViewDataSource{
 }
 
 
-
-
+extension MapVC:UIViewControllerPreviewingDelegate{
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = collectionView?.indexPathForItem(at: location),let cell = collectionView?.cellForItem(at: indexPath) else {
+            return nil
+        }
+        
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "popVC") as? PopVC else { return nil }
+        print("setup item")
+        popVC.initData(forImage: imageArray[indexPath.item])
+        previewingContext.sourceRect = cell.contentView.frame
+        return popVC
+        
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        print("popcontext")
+        show(viewControllerToCommit, sender: self)
+    }
+}
 
 
 
