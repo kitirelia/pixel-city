@@ -14,7 +14,7 @@ func flickrUrl(forApiKey key:String,withAnnotation annotation:DropablePin,number
     
     let url = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(API_KEY)&lat=\(annotation.coordinate.latitude)&lon=\(annotation.coordinate.longitude)&radius=\(radiusRange)&radius_units=km&per_page=\(number)&format=json&nojsoncallback=1"
     
-    print(url)
+   // print(url)
     return url
 }
 
