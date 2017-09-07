@@ -188,6 +188,7 @@ extension MapVC:MKMapViewDelegate{
             guard let json = response.result.value as? Dictionary<String,AnyObject> else {return}
             let photosDict = json["photos"] as! Dictionary<String,AnyObject>
             let photosDictArray = photosDict["photo"] as! [Dictionary<String,AnyObject>]
+            print("get photo \(photosDictArray.count)")
             for photo in photosDictArray{
                 let postUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"//_z_d
                 //print(postUrl)
